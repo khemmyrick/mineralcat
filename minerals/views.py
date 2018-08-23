@@ -12,5 +12,4 @@ def mineral_list(request):
     for mineral in minerals:
         output += str(mineral)
         output += ', '
-    # output = ', '.join(minerals)
     return HttpResponse(output)
