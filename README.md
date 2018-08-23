@@ -3,6 +3,7 @@
 #Just Did
 1. Restarted Project 6 in new repository.
 2. Set project directory as git root directory.
+3. Basic setup and Django review steps in progress.
 
 # To Do:
 
