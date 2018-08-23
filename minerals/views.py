@@ -8,8 +8,11 @@ def index(request):
 
 def mineral_list(request):
     minerals = Mineral.objects.all()
-    output = ''
-    for mineral in minerals:
-        output += str(mineral)
-        output += ', '
-    return HttpResponse(output)
+    # output = ''
+    # for mineral in minerals:
+    #    output += str(mineral)
+    #    output += ', '
+    # return HttpResponse(output)
+    return render(request,
+                  'minerals/mineral_list.html',
+                  {'minerals': minerals})
