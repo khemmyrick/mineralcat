@@ -2,9 +2,15 @@
 
 {% block title %} - List{% endblock%}
 {% block content %}
-{% for mineral in minerals %}
-	<ul class="minerals_container">
-		<li class="minerals_item"><a class="minerals_anchor" href="#">{{ mineral.name }}</a></li>
-	</ul>
-{% endfor %}
+<div class="bounds">
+    <div class="grid-100">
+      <ul class="minerals__container">
+	    {% for mineral in minerals %}
+			<li class="minerals__item">
+				<a class="minerals__anchor" href="detail.html">{{ mineral.name }}</a>
+			</li>
+		{% endfor %}
+      </ul>
+    </div>
+  </div>
 {% endblock %}

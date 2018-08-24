@@ -5,6 +5,9 @@ from .models import Mineral
 
 def index(request):
     return HttpResponse("Welcome to the Minerals index.")
+    # return render(request,
+    #              'minerals/mineral_list.html',
+    #              {'minerals': minerals})
 
 
 def mineral_list(request):
