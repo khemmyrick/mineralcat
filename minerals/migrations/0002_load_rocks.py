@@ -43,15 +43,11 @@ def loadmin():
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('minerals'),
+        ('minerals', '0001_initial'),
     ]
-# minerals is name of app... will try initial migration file instead
-# Also, adding trailing comma for single item tuple.
 
     operations = [
         migrations.RunPython(loadmin)
     ]
-    
-    
+
