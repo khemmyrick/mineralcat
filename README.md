@@ -3,10 +3,7 @@
 #Just Did
 1. Started work on basic templates and views.
 2. Attempted to add 2nd migration to load JSON.
-- When load_rocks was in migrations dir (as 0002_load_rocks)
-it raised a NodeNotFound error, which seems to think that either
-the initial migration never happened, or that load_rocks
-can't be dependent on 0001_initial forsome other reason.
+- 0002_load_rocks is raising a NodeNotFound error, whenever I try to runserver!
 3. Basic setup and Django review steps / version update parsing / pre-test debugging.
 
 # To Do:
