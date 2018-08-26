@@ -16,35 +16,35 @@ def loadmin(apps, schema_editor):
     minelist = []
     with open('minerals/fixtures/minerals_data.json', 'r', encoding="utf8") as mindb:
         data = json.load(mindb)
-        # json1_data = json.loads(data)[0]
+        # data is a LIST of DICTS
         for mineral in data:
-            try:
-                skip_this = Mineral.objects.get(name=mineral['name'])
-            except Mineral.DoesNotExist:
-                obj = Mineral(name=get('name', ''),
-                              imgfile=get('image filename', ''),
-                              imgcap=get('image caption', ''),
-                              category=get('category', ''),
-                              formula=get('formula', ''),
-                              strunz_class=get('strunz classification', ''),
-                              color=get('color', ''),
-                              crystal_sys=get('crystal system', ''),
-                              unit_cell=get('unit cell', ''),
-                              crystal_symmetry=get('crystal symmetry', ''),
-                              cleavage=get('cleavage', ''),
-                              ms_hardness=get('mohs scale hardness', ''),
-                              luster=get('luster', ''),
-                              streak=get('streak', ''),
-                              optical_prop=get('optical properties', ''),
-                              refractive_index=get('refractive index', ''),
-                              crystal_habit=get('crystal habit', ''),
-                              specific_gravity=get('specific gravity', ''),
-                              family=get('group', ''),
-                             )
-                minelist.append(obj)
+            # try:
+            #     skip_this = Mineral.objects.get(name=mineral['name'])
+            # except Mineral.DoesNotExist:
+            obj = Mineral(name=mineral.get('name', ''),
+                          imgfile=mineral.get('image filename', ''),
+                          imgcap=mineral.get('image caption', ''),
+                          category=mineral.get('category', ''),
+                          formula=mineral.get('formula', ''),
+                          strunz_class=mineral.get('strunz classification', ''),
+                          color=mineral.get('color', ''),
+                          crystal_sys=mineral.get('crystal system', ''),
+                          unit_cell=mineral.get('unit cell', ''),
+                          crystal_symmetry=mineral.get('crystal symmetry', ''),
+                          cleavage=mineral.get('cleavage', ''),
+                          ms_hardness=mineral.get('mohs scale hardness', ''),
+                          luster=mineral.get('luster', ''),
+                          streak=mineral.get('streak', ''),
+                          optical_prop=mineral.get('optical properties', ''),
+                          refractive_index=mineral.get('refractive index', ''),
+                          crystal_habit=mineral.get('crystal habit', ''),
+                          specific_gravity=mineral.get('specific gravity', ''),
+                          group=mineral.get('group', ''),
+                         )
+            minelist.append(obj)
             # Add each mineral instance to list.
-            else:
-                continue
+            # else:
+            #    continue
     Mineral.objects.bulk_create(minelist)
     # Save entire list to database.
 
