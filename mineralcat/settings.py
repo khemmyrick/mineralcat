@@ -122,3 +122,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
 )
+
+FIXTURE_DIRS = (
+   '/mineralcat/minerals/fixtures/',
+)
