@@ -3,7 +3,7 @@
 #Just Did
 1. Started work on basic templates and views.
 2. Attempted to add 2nd migration to load JSON.
-- 0002_load_rocks is raising a NodeNotFound error, whenever I try to runserver!
+- 0002_load_rocks is throwing varying errors when I try to migrate.
 3. Basic setup and Django review steps / version update parsing / pre-test debugging.
 
 # To Do:
