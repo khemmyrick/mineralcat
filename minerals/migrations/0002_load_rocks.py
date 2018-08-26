@@ -9,9 +9,10 @@ from django.db import migrations, models
 def loadmin(apps, schema_editor):
     """Load JSON file into Django Database?"""
     minelist = []
-    with open('minerals_data.json') as mindb:
+    with open('minerals/fixtures/minerals_data.json', 'r') as mindb:
         data = json.load(mindb)
-        for mineral in data:
+        json1_data = json.loads(data)[0]
+        for mineral in json1_data:
             if Mineral.objects.get(name=mineral['name']):
                 continue
             else:
