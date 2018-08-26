@@ -4,7 +4,8 @@
 1. Started work on basic templates and views.
 2. Added 2nd migration to load JSON. (as of 12:20pm August 26).
 3. Generic sample minerals plus full list from json now display on mineral_list template.
-4. Basic setup and Django review steps / version update parsing / pre-test debugging.
+4. Added mineral.attributes to mineral_detail view.
+5. Basic setup and Django review steps / version update parsing / pre-test debugging.
 
 # To Do:
 
