@@ -4,7 +4,7 @@ import json
 
 from django.db import migrations, models
 
-from ..models import Mineral
+# from ..models import Mineral  ### DJANGO pulls model from operations' arguments apparently?
 # import models from django.db???
 
 # from mineralcat import minerals, models
@@ -13,6 +13,7 @@ from ..models import Mineral
 
 def loadmin(apps, schema_editor):
     """Load JSON file into Django Database?"""
+    Mineral = apps.get_model('minerals', 'Mineral')
     minelist = []
     with open('minerals/fixtures/minerals_data.json', 'r', encoding="utf8") as mindb:
         data = json.load(mindb)
