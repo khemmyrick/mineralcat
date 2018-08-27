@@ -19,3 +19,10 @@ def formula_markup(f_string):
         new_item = '<sub>{}</sub>'.format(l_item)
         f_string = f_string.replace(l_item, new_item)
     return f_string
+
+@register.filter('underspace')
+def underspace(attr_string):
+    return attr_string.replace('_', ' ')
+    
+# Can I use a tag to iterate through my Mineral attributes?
+# It would take the mineral as an argument, and return a list of tuples or something?

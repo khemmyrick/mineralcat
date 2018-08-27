@@ -4,8 +4,7 @@
 {% load mineral_extras %}
 {% block title %} - {{ mineral.name }}{% endblock%}
 {% block content %}
-
-<div class="bounds bounds--small">
+  <div class="bounds bounds--small">
     <div class="grid-100 mineral__container">
       <h1 class="mineral__name">{{ mineral.name }}</h1>
       <div class="mineral__image-bg">
@@ -13,84 +12,19 @@
         <p class="mineral__caption">{{ mineral.imgcap }}</p>
       </div>
       <div class="mineral__table-container">
-        <table class="mineral__table"><!-- forloop through attributes to generate table.  Add 'mineral.attr|title' to attribute labels to apply Title Case. -->
-          <tbody>
-			  <tr>
-				<td class="mineral__category">Category</td>
-				<td>{{ mineral.category }}</td>
-			  </tr>
-			  {% if mineral.formula %}
-			  <tr>
-				<td class="mineral__category">Formula</td><!-- Add safe filter after I un-double sub tags. -->
-				<td class="mineral__formula">{{ mineral.formula|safe }}</td>
-			  </tr>
-			  {% endif %}
-			  <tr>
-				<td class="mineral__category">Strunz Classification</td>
-				<td>{{ mineral.strunz_class}}</td>
-			  </tr>
-			  <tr>
-				<td class="mineral__category">Unit Cell</td>
-				<td>{{ mineral.unit_cell }}</td>
-			  </tr>
-			  <tr>
-				<td class="mineral__category">Color</td>
-				<td>{{ mineral.color }}</td>
-			  </tr>
-			  <tr>
-				<td class="mineral__category">Crystal Habit</td>
-				<td>{{ mineral.crystal_habit }}</td>
-			  </tr>
-			  <tr>
-				<td class="mineral__category">Mohs Scale Hardness</td>
-				<td>{{ mineral.ms_hardness }}</td>
-			  </tr>
-        </tbody></table>
+		<table class="mineral__table">
+			<tbody>
+				{% for attr in attrlist %}
+					{% if attr.1 %}
+						<tr>
+							<td class="mineral__category">{{ attr.0|title|underspace }}</td>
+							<td>{{ attr.1|safe }}</td>
+						</tr>
+					{% endif %}
+				{% endfor %}
+			</tbody>
+		</table>
       </div>
     </div>
   </div>
-
-<!--
-	<article class="grid-100 mineral_container">
-		<h1 class="mineral_name">{{ mineral.name }}</h1>
-		<div class="mineral_image-bg">
-            <!-- IMAGE HERE --> <!--
-			<p class="mineral_caption">Mineral Image Caption Here</p>
-		</div>
-		<div class="mineral_table-container">
-			<table class="mineral__table">
-				<tbody><!-- forloop through attributes to generate table? --><!--
-				  <tr>
-					<td class="mineral__category">Category</td>
-					<td>Mineral category</td>
-				  </tr>
-				  <tr>
-					<td class="mineral__category">Formula</td>
-					<td class="mineral__formula">
-						<!-- This part may require safe filter? --><!--
-						Ca<sub>4</sub>(Al,Fe,Mg)<sub>10</sub>Si<sub>12</sub>O<sub>35</sub>(OH)<sub>12</sub>CO<sub>3</sub>·12H<sub>2</sub>O</td>
-				  </tr>
-				  <tr>
-					<td class="mineral__category">Strunz Classification</td>
-					<td>09.DB.45</td>
-				  </tr>
-				  <tr>
-					<td class="mineral__category">Unit Cell</td>
-					<td>a = 14.690(15) Å, b = 16.872(15) Å, c = 5.170(15) Å, Z = 2</td>
-				  </tr>
-				  <tr>
-					<td class="mineral__category">Color</td>
-					<td>Blue to blue-green</td>
-				  </tr>
-				  <tr>
-					<td class="mineral__category">Crystal Habit</td>
-					<td>fibrous</td>
-				  </tr>
-				  <tr>
-					<td class="mineral__category">Mohs Scale Hardness</td>
-					<td>3</td>
-				  </tr>
-				</tbody>
-			</table>
-	</article> -->
 {% endblock %}
