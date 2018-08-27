@@ -10,7 +10,7 @@
 	<body>
 		<nav></nav>
 		<div class="bounds">
-			<div class="grid-100">
+			<header class="grid-100">
 				<a href="{% url 'mineral_list' %}"><!-- use appropriate django 2.1 logic to point to templates -->
 					<!-- LOGOHERE -->
 					<svg class="logo" viewBox="0 0 127.6 84.8" preserveaspectration="xMinYMin meet">
@@ -21,14 +21,14 @@
 					<h1 class="logo_name text-centered">Mineral Cat</h1>
 				</a>
 				<p class="logo_text text-centered">All the Gems!</p>
-			</div>
+			</header>
 			<div class="grid-100">
 			
 			{% block content %}{% endblock %}
 			</div>
 		</div>
-		<div class="minerals__random">
+		<footer class="minerals__random">
 			<a class="minerals__anchor" href="{% url 'random_mineral' %}">Show random mineral</a>
-		</div>
+		</footer>
 	</body>
 </html>
