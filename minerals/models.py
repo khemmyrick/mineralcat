@@ -8,7 +8,7 @@ class Mineral(models.Model):
     category = models.CharField('category', max_length=250)
     formula = models.CharField('formula', max_length=250)
     strunz_classification = models.CharField('strunz classification',
-                                             max_length=250)
+                                             max_length=500)
     color = models.CharField('color', max_length=250)
     crystal_system = models.CharField('crystal system', max_length=250)
     unit_cell = models.CharField('unit cell', max_length=250)

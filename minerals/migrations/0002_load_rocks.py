@@ -27,19 +27,26 @@ def loadmin(apps, schema_editor):
                           imgcap=mineral.get('image caption', ''),
                           category=mineral.get('category', ''),
                           formula=mineral.get('formula', ''),
-                          strunz_class=mineral.get('strunz classification', ''),
+                          strunz_classification=mineral.get(
+                            'strunz classification', ''),
                           color=mineral.get('color', ''),
-                          crystal_sys=mineral.get('crystal system', ''),
+                          crystal_system=mineral.get('crystal system', ''),
                           unit_cell=mineral.get('unit cell', ''),
-                          crystal_symmetry=mineral.get('crystal symmetry', ''),
+                          crystal_symmetry=mineral.get(
+                            'crystal symmetry', ''),
                           cleavage=mineral.get('cleavage', ''),
-                          ms_hardness=mineral.get('mohs scale hardness', ''),
+                          mohs_scale_hardness=mineral.get(
+                            'mohs scale hardness', ''),
                           luster=mineral.get('luster', ''),
                           streak=mineral.get('streak', ''),
-                          optical_prop=mineral.get('optical properties', ''),
-                          refractive_index=mineral.get('refractive index', ''),
+                          diaphaneity=mineral.get('diaphaneity', ''),
+                          optical_properties=mineral.get(
+                            'optical properties', ''),
+                          refractive_index=mineral.get(
+                            'refractive index', ''),
                           crystal_habit=mineral.get('crystal habit', ''),
-                          specific_gravity=mineral.get('specific gravity', ''),
+                          specific_gravity=mineral.get(
+                            'specific gravity', ''),
                           group=mineral.get('group', ''),
                          )
             minelist.append(obj)

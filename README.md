@@ -22,6 +22,7 @@
 # EXTRA CREDIT
 
 2. EC: Display the most common or important details at the top of the details list. 
+- Use shell to calculate which details are encountered most often.
 - You can decide on what order to display them in.
 - The other miscellaneous details can be in any order.
 
