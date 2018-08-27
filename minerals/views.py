@@ -1,3 +1,5 @@
+import random
+
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 
@@ -28,3 +30,8 @@ def mineral_detail(request, pk):
     return render(request,
                   'minerals/mineral_detail.html',
                   {'mineral': mineral})
+
+def random_mineral(request):
+    pickfrom = len(Mineral.objects.all())
+    prikey = random.randint(1, pickfrom)
+    return mineral_detail(request, prikey)
