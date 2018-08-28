@@ -11,8 +11,8 @@
 6. mineral_detail template now iterates through minearal attributes.
 7. Basic setup and Django review steps / version update parsing / pre-test debugging.
 8. Added group model, group_list template/view and random_ingroup view.
-9. In process of adding group model to minerals app.
-
+9. Added group model to minerals app.
+10. Corrected namespace issues which prevented tests from running correctly.
 
 # To Do:
 

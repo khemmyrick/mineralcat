@@ -12,7 +12,7 @@
 		<nav></nav>
 		<div class="bounds">
 			<header class="grid-100">
-				<a href="{% url 'mineral_list' %}"><!-- use appropriate django 2.1 logic to point to templates -->
+				<a href="{% url 'minerals:mineral_list' %}"><!-- use appropriate django 2.1 logic to point to templates -->
 					<!-- LOGOHERE -->
 					<svg class="logo" viewBox="0 0 127.6 84.8" preserveaspectration="xMinYMin meet">
 					  <polygon points="42.7,84.8 49.6,79.4 40,62.5 51.2,43.5 51.2,43.5 25,0 0,55.6 "></polygon>
@@ -29,7 +29,7 @@
 			</div>
 		</div>
 		<footer class="minerals__random">
-			<a class="minerals__anchor" href="{% url 'random_mineral' %}">Show random mineral</a>
+			<a class="minerals__anchor" href="{% url 'minerals:random_mineral' %}">Show random mineral</a>
 		</footer>
 	</body>
 </html>

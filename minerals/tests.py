@@ -137,7 +137,7 @@ class MineralViewsTests(TestCase):
         )
         
     def test_mineral_list_view(self):
-        resp = self.client.get(reverse('minerals:mineral_list/'))
+        resp = self.client.get(reverse('minerals:mineral_list'))
         self.assertEqual(resp.status_code, 200)
         self.assertIn(self.pearl, resp.context['minerals'])
         self.assertIn(self.amethyst, resp.context['minerals'])
