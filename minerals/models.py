@@ -1,6 +1,16 @@
 from django.db import models
 
 
+class Group(models.Model):
+    name = models.CharField(max_length=50)
+    
+    def __str__(self):
+        return self.name
+    
+    def get_min(self):
+        return Mineral.objects.filter(group=self)
+
+
 class Mineral(models.Model):
     name = models.CharField(max_length=250)
     imgfile = models.CharField(default='', max_length=250)
@@ -24,7 +34,7 @@ class Mineral(models.Model):
     refractive_index = models.CharField('refractive index', max_length=250)
     crystal_habit = models.CharField('crystal habit', max_length=250)
     specific_gravity = models.CharField('specific gravity', max_length=250)
-    group = models.CharField('group', max_length=250)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

@@ -8,12 +8,24 @@
     <div class="grid-100 mineral__container">
       <h1 class="mineral__name">{{ mineral.name }}</h1>
       <div class="mineral__image-bg">
-        <img class="mineral__image" src="{% static 'img/' %}{{ mineral.name }}.jpg" alt="{{ mineral.name|title }}">
+        <img class="mineral__image" src="{% static 'img/' %}{{ mineral.name|safe }}.jpg" alt="{{ mineral.name|title }}">
         <p class="mineral__caption">{{ mineral.imgcap }}</p>
       </div>
       <div class="mineral__table-container">
 		<table class="mineral__table">
 			<tbody>
+				<tr>
+					<td class="mineral__category"><h4>Group</h4></td>
+					<td><h4><a class="minerals__anchor"  href="{% url 'group_list' pk=mineral.group.pk %}">{{ mineral.group.name }}</a></h4></td>
+				</tr>
+				<tr>
+					<td class="mineral__category"><h4>Category</h4></td>
+					<td><h4>{{ mineral.category }}</h4></td>
+				</tr>
+				<tr>
+					<td class="mineral__category"><h4>Forumula</h4></td>
+					<td><h4>{{ mineral.formula|safe }}</h4></td>
+				</tr>
 				{% for attr in attrlist %}
 					{% if attr.1 %}
 						<tr>

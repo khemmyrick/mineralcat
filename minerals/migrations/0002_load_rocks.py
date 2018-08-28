@@ -1,27 +1,27 @@
 # -*- coding: utf-8 -*-
-# from __future__ import unicode_literals
+
 import json
 
 from django.db import migrations, models
 
-# from ..models import Mineral  ### DJANGO pulls model from operations' arguments apparently?
-# import models from django.db???
-
-# from mineralcat import minerals, models
-# Should I be importing models from my app?  
-# Does django.db give the models file from my app?
 
 def loadmin(apps, schema_editor):
-    """Load JSON file into Django Database?"""
+    """Load JSON file into Django Database."""
+    Group = apps.get_model('minerals', 'Group')
     Mineral = apps.get_model('minerals', 'Mineral')
+    g_list = []
     minelist = []
     with open('minerals/fixtures/minerals_data.json', 'r', encoding="utf8") as mindb:
         data = json.load(mindb)
-        # data is a LIST of DICTS
         for mineral in data:
-            # try:
-            #     skip_this = Mineral.objects.get(name=mineral['name'])
-            # except Mineral.DoesNotExist:
+            g_list.append(mineral.get('group', ''))
+        g_set = set(g_list)
+        g_list = []
+        for gname in g_set:
+            gobj = Group(name=gname)
+            g_list.append(gobj)
+        Group.objects.bulk_create(g_list)
+        for mineral in data:
             obj = Mineral(name=mineral.get('name', ''),
                           imgfile=mineral.get('image filename', ''),
                           imgcap=mineral.get('image caption', ''),
@@ -47,19 +47,11 @@ def loadmin(apps, schema_editor):
                           crystal_habit=mineral.get('crystal habit', ''),
                           specific_gravity=mineral.get(
                             'specific gravity', ''),
-                          group=mineral.get('group', ''),
+                          group=Group.objects.get(name=mineral.get('group', ''))
                          )
             minelist.append(obj)
-            # Add each mineral instance to list.
-            # else:
-            #    continue
-    Mineral.objects.bulk_create(minelist)
-    # Save entire list to database.
 
-# def unloadmin():
-#    """Delete all the database entries."""
-#    # Is this a thing I have to do?
-#    Minerals.objects.all().delete()
+    Mineral.objects.bulk_create(minelist)
 
 
 class Migration(migrations.Migration):

@@ -10,7 +10,10 @@ footer {
 a { background-color: transparent; }
 a:active, a:hover { outline: 0; }
 
-h1 { font-size: 2em; margin: 0.67em 0; }
+h1 { 
+	font-size: 2em;
+	margin: 0.67em 0;
+}
 
 sub { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; bottom: -0.25em; }
 

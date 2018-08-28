@@ -10,6 +10,8 @@
 5. Added random_mineral view. Relatively easy money, as expected.
 6. mineral_detail template now iterates through minearal attributes.
 7. Basic setup and Django review steps / version update parsing / pre-test debugging.
+8. Added group model, group_list template/view and random_ingroup view.
+9. In process of adding group model to minerals app.
 
 
 # To Do:
@@ -21,9 +23,5 @@
 
 # EXTRA CREDIT
 
-2. EC: Display the most common or important details at the top of the details list. 
-- Use shell to calculate which details are encountered most often.
-- You can decide on what order to display them in.
-- The other miscellaneous details can be in any order.
-
-3. EC: In addition to those provided, additional styles are added and used.
+2. EC: In addition to those provided, additional styles are added and used.
+- Add CSS ID tags to global.css, or start new css file.
