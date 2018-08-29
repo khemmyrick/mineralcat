@@ -14,11 +14,10 @@
 9. Added group model to minerals app.
 10. Corrected namespace issues which prevented tests from running correctly.
 11. Added tests for models, views and templatetags.
-- Coverage at 95%!
+- Coverage at 96%!
+12. Added new CSS file, local.css. 
+13. Added a javascript file for a slideshow on the index page. 
+14. Added additional views, templates and template tags.
 
 # To Do:
-# EXTRA CREDIT
-
-1. EC: In addition to those provided, additional styles are added and used.
-- Add CSS ID tags to global.css, or start new css file.
-2. Write final readme file for this project.
+1. Have Treehouse Slack community review project.

@@ -12,12 +12,7 @@ class ModelTests(TestCase):
         self.group = Group.objects.create(
             name="Crystal Gems"
         )
-
-    def test_group_creation(self):
-        self.assertEqual(self.group.name, 'Crystal Gems')
-
-    def test_mineral_creation(self):
-        mineral = Mineral.objects.create(
+        self.mineral = Mineral.objects.create(
             name="Pearl",
             imgfile="Unusable Garbage",
             imgcap="Various pearls",
@@ -39,7 +34,16 @@ class ModelTests(TestCase):
             specific_gravity="2.60–2.85",
             group=self.group
         )
-        self.assertIn(mineral, self.group.mineral_set.all())
+
+    def test_group_creation(self):
+        self.assertEqual(self.group.name, 'Crystal Gems')
+
+    def test_group_get_min(self):
+        m_list = self.group.get_min()
+        self.assertIn(self.mineral, m_list)
+
+    def test_mineral_creation(self):
+        self.assertIn(self.mineral, self.group.mineral_set.all())
 
 
 class ViewsTests(TestCase):
@@ -145,7 +149,15 @@ class ViewsTests(TestCase):
         
         self.all_min = Mineral.objects.all()
         
+        self.all_groups = Group.objects.all()
+        
         self.cg_list = self.cg.get_min()
+        
+    def test_index_view(self):
+        resp = self.client.get(reverse('minerals:index'))
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn(self.cg, resp.context['groups'])
+        self.assertIn(self.hg, resp.context['groups'])
         
     def test_mineral_list_view(self):
         resp = self.client.get(reverse('minerals:mineral_list'))
@@ -182,8 +194,64 @@ class ViewsTests(TestCase):
         self.assertIn(self.jasper, resp.context['minerals'])
         self.assertEqual(self.hg, resp.context['group'])
 
+    def test_random_group_view(self):
+        resp = self.client.get(reverse('minerals:random_group'))
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn(resp.context['group'], self.all_groups)
 
 class MineralExtrasTests(TestCase):
     def test_underspace(self):
         output = mineral_extras.underspace('attr_string')
         self.assertEqual(output, 'attr string')
+
+    def test_jpegger(self):
+        self.cg = Group.objects.create(
+            name="Crystal Gems"
+        )
+        self.pearl = Mineral.objects.create(
+            name="Pearl",
+            imgfile="Unusable Garbage",
+            imgcap="Various pearls",
+            category="Carbonate mineral, protein",
+            formula="<sub>pearl</sub>",
+            strunz_classification="05.AB",
+            color="white, pink, silver, cream, etc",
+            crystal_system="Orthorhombic",
+            unit_cell="",
+            crystal_symmetry="",
+            cleavage="",
+            mohs_scale_hardness="2.5–4.5",
+            luster="",
+            streak="white",
+            diaphaneity="",
+            optical_properties="",
+            refractive_index="1.52-1.66",
+            crystal_habit="",
+            specific_gravity="2.60–2.85",
+            group=self.cg
+        )
+        self.amethyst = Mineral.objects.create(
+            name="Amethyst",
+            imgfile="Unusable Garbage",
+            imgcap="Various amethysts",
+            category="Carbonate mineral, protein",
+            formula="<sub>amethyst</sub>",
+            strunz_classification="05.AB",
+            color="white, pink, silver, cream, etc",
+            crystal_system="Orthorhombic",
+            unit_cell="",
+            crystal_symmetry="",
+            cleavage="",
+            mohs_scale_hardness="2.5–4.5",
+            luster="",
+            streak="purple",
+            diaphaneity="",
+            optical_properties="",
+            refractive_index="1.52-1.66",
+            crystal_habit="",
+            specific_gravity="2.60–2.85",
+            group=self.cg
+        )
+        self.m_str = mineral_extras.jpegger(self.cg.name)
+        self.assertIn('.jpg', self.m_str)
+        self.assertIn(self.m_str, ['Amethyst.jpg', 'Pearl.jpg'])

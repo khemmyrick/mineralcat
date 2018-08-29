@@ -7,7 +7,10 @@ from django.db import models as orig_g
 from .models import Group, Mineral
 
 def index(request):
-    return HttpResponse("Welcome to the Minerals index.")
+    groups = Group.objects.all()
+    return render(request,
+                  'minerals/index.html',
+                  {'groups': groups})
 
 
 def mineral_list(request):
@@ -59,3 +62,8 @@ def random_ingroup(request, pk):
     m_choice = [mineral.pk for mineral in minerals]
     prikey = random.choice(m_choice)
     return mineral_detail(request, prikey)
+
+def random_group(request):
+    pick_group = len(Group.objects.all())
+    prikey = random.randint(1, pick_group)
+    return group_list(request, prikey)

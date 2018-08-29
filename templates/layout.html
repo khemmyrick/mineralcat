@@ -5,8 +5,9 @@
 		<title>MineralCat{% block title %}{% endblock %}</title>
 		<link href="https://fonts.googleapis.com/css?family=Work+Sans:400,500" rel="stylesheet" type="text/css">
 		<link href="https://fonts.googleapis.com/css?family=Cousine" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="{% static 'css/global.css' %}">
+		<link rel="stylesheet" href="{% static 'css/local.css' %}">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		{% block head %}{% endblock %}
 	</head>
 	<body>
 		<nav></nav>
@@ -21,7 +22,15 @@
 					</svg>
 					<h1 class="logo_name text-centered">Mineral Cat</h1>
 				</a>
-				<p class="logo_text text-centered">All the Gems!</p>
+				<p class="logo_text text-centered">The <strong>Purr</strong>fect <strong>Meow</strong>neral <strong>Cat</strong>abase!</p>
+				<nav>
+					<ul>
+						<li><a class="minerals__anchor" href="{% url 'minerals:index' %}">Home</a></li>
+						<li><a class="minerals__anchor" href="{% url 'minerals:mineral_list' %}">Mineral List</a></li>
+						<li><a class="minerals__anchor" href="{% url 'minerals:random_group' %}">Random Mineral Group Page</a></li>
+					</ul>
+				</nav>
+				<hr>
 			</header>
 			<div class="grid-100">
 			
@@ -29,7 +38,8 @@
 			</div>
 		</div>
 		<footer class="minerals__random">
-			<a class="minerals__anchor" href="{% url 'minerals:random_mineral' %}">Show random mineral</a>
+			<a class="minerals__anchor" href="{% url 'minerals:mineral_list' %}">Return to List of Minerals</a>
+			<a class="minerals__anchor" href="{% url 'minerals:random_mineral' %}">Show Random Mineral</a>
 		</footer>
 	</body>
 </html>
