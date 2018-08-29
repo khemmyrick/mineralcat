@@ -1,15 +1,18 @@
+import random
 
 from django.urls import reverse
 from django.test import TestCase
 
 from .models import Group, Mineral
+from minerals.templatetags import mineral_extras
 
-class MineralModelTests(TestCase):
+
+class ModelTests(TestCase):
     def setUp(self):
         self.group = Group.objects.create(
             name="Crystal Gems"
         )
-        
+
     def test_group_creation(self):
         self.assertEqual(self.group.name, 'Crystal Gems')
 
@@ -39,7 +42,7 @@ class MineralModelTests(TestCase):
         self.assertIn(mineral, self.group.mineral_set.all())
 
 
-class MineralViewsTests(TestCase):
+class ViewsTests(TestCase):
     def setUp(self):
         self.cg = Group.objects.create(
             name="Crystal Gems"
@@ -52,7 +55,7 @@ class MineralViewsTests(TestCase):
             imgfile="Unusable Garbage",
             imgcap="Various pearls",
             category="Carbonate mineral, protein",
-            formula="CaCO<sub>3</sub>",
+            formula="<sub>pearl</sub>",
             strunz_classification="05.AB",
             color="white, pink, silver, cream, etc",
             crystal_system="Orthorhombic",
@@ -74,7 +77,7 @@ class MineralViewsTests(TestCase):
             imgfile="Unusable Garbage",
             imgcap="Various amethysts",
             category="Carbonate mineral, protein",
-            formula="CaCO<sub>3</sub>",
+            formula="<sub>amethyst</sub>",
             strunz_classification="05.AB",
             color="white, pink, silver, cream, etc",
             crystal_system="Orthorhombic",
@@ -94,9 +97,9 @@ class MineralViewsTests(TestCase):
         self.nephrite = Mineral.objects.create(
             name="Nephrite",
             imgfile="Unusable Garbage",
-            imgcap="Various pearls",
+            imgcap="Various nephrites",
             category="Carbonate mineral, protein",
-            formula="CaCO<sub>3</sub>",
+            formula="<sub>nephrite</sub>",
             strunz_classification="05.AB",
             color="white, pink, silver, cream, etc",
             crystal_system="Orthorhombic",
@@ -118,7 +121,7 @@ class MineralViewsTests(TestCase):
             imgfile="Unusable Garbage",
             imgcap="Various jaspers",
             category="Carbonate mineral, protein",
-            formula="CaCO<sub>3</sub>",
+            formula="<sub>jasper</sub>",
             strunz_classification="05.AB",
             color="white, pink, silver, cream, etc",
             crystal_system="Orthorhombic",
@@ -135,6 +138,14 @@ class MineralViewsTests(TestCase):
             specific_gravity="2.60–2.85",
             group=self.hg
         )
+        self.dnw = ['DoesNotExist', 'MultipleObjectsReturned', '_state', 'id',
+               'name', 'imgcap', 'imgfile', 'objects', 'group', 'category',
+               'formula', 'group_id']
+        self.dnw_member = random.choice(self.dnw)
+        
+        self.all_min = Mineral.objects.all()
+        
+        self.cg_list = self.cg.get_min()
         
     def test_mineral_list_view(self):
         resp = self.client.get(reverse('minerals:mineral_list'))
@@ -144,4 +155,35 @@ class MineralViewsTests(TestCase):
         self.assertIn(self.nephrite, resp.context['minerals'])
         self.assertIn(self.jasper, resp.context['minerals'])
 
-    
+    def test_mineral_detail_view(self):
+        resp = self.client.get(reverse('minerals:mineral_detail',
+                                       kwargs={'pk': self.pearl.pk}))
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(self.pearl, resp.context['mineral'])
+        self.assertNotIn(self.dnw_member, resp.context['attrlist'])
+        self.assertIn('cleavage', resp.context['attrlist'][0])
+        
+    def test_random_mineral_view(self):
+        resp = self.client.get(reverse('minerals:random_mineral'))
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn(resp.context['mineral'], self.all_min)
+
+    def test_random_ingroup_view(self):
+        resp = self.client.get(reverse('minerals:random_ingroup',
+                                       kwargs={'pk': self.cg.pk}))
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn(resp.context['mineral'], self.cg_list)
+
+    def test_group_list_view(self):
+        resp = self.client.get(reverse('minerals:group_list',
+                                       kwargs={'pk': self.hg.pk}))
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn(self.nephrite, resp.context['minerals'])
+        self.assertIn(self.jasper, resp.context['minerals'])
+        self.assertEqual(self.hg, resp.context['group'])
+
+
+class MineralExtrasTests(TestCase):
+    def test_underspace(self):
+        output = mineral_extras.underspace('attr_string')
+        self.assertEqual(output, 'attr string')

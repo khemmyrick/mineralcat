@@ -11,14 +11,16 @@ def index(request):
 
 
 def mineral_list(request):
+    """Generate template list of all minerals."""
     minerals = Mineral.objects.all()
     return render(request,
                   'minerals/mineral_list.html',
                   {'minerals': minerals})
 
 def group_list(request, pk):
+    """Generate template list of all minerals in a specific group."""
     group = get_object_or_404(Group, pk=pk)
-    minerals = group.get_min
+    minerals = group.get_min()
     return render(request,
                   'minerals/group_list.html',
                   {'minerals': minerals,
@@ -26,6 +28,7 @@ def group_list(request, pk):
 
 
 def mineral_detail(request, pk):
+    """Generate template for a specific mineral."""
     mineral = get_object_or_404(Mineral, pk=pk)
     attrlist = list(filter(lambda a: not a.startswith('__'), dir(mineral)))
     mlist = [dflt for dflt in dir(orig_g.Model)]

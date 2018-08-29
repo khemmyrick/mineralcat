@@ -13,15 +13,12 @@
 8. Added group model, group_list template/view and random_ingroup view.
 9. Added group model to minerals app.
 10. Corrected namespace issues which prevented tests from running correctly.
+11. Added tests for models, views and templatetags.
+- Coverage at 95%!
 
 # To Do:
-
-1. Write unit tests to test that each view is displaying the correct information.
-- Doublecheck TDD section of Django Basics course.
-- Use Slack.  Do not be stuck on this step for more than 2 days.
-- Possibly do this step after EC step.
-
 # EXTRA CREDIT
 
-2. EC: In addition to those provided, additional styles are added and used.
+1. EC: In addition to those provided, additional styles are added and used.
 - Add CSS ID tags to global.css, or start new css file.
+2. Write final readme file for this project.
