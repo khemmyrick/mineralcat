@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
-from minerals.models import Group, Mineral
+from minerals.models import Group
+
 
 def index(request):
     groups = Group.objects.all()

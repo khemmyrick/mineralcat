@@ -3,10 +3,10 @@ from django.db import models
 
 class Group(models.Model):
     name = models.CharField(max_length=50)
-    
+
     def __str__(self):
         return self.name
-    
+
     def get_min(self):
         return Mineral.objects.filter(group=self)
 

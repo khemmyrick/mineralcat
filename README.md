@@ -18,6 +18,7 @@
 12. Added new CSS file, local.css. 
 13. Added a javascript file for a slideshow on the index page. 
 14. Added additional views, templates and template tags.
+15. Ran Flake8.
 
 # To Do:
 1. Have Treehouse Slack community review project.

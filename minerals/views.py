@@ -1,10 +1,10 @@
 import random
 
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse
 from django.db import models as orig_g
 
 from .models import Group, Mineral
+
 
 def index(request):
     groups = Group.objects.all()
@@ -19,6 +19,7 @@ def mineral_list(request):
     return render(request,
                   'minerals/mineral_list.html',
                   {'minerals': minerals})
+
 
 def group_list(request, pk):
     """Generate template list of all minerals in a specific group."""
@@ -51,10 +52,12 @@ def mineral_detail(request, pk):
                   {'mineral': mineral,
                    'attrlist': attrlist})
 
+
 def random_mineral(request):
     pickfrom = len(Mineral.objects.all())
     prikey = random.randint(1, pickfrom)
     return mineral_detail(request, prikey)
+
 
 def random_ingroup(request, pk):
     group = get_object_or_404(Group, pk=pk)
@@ -62,6 +65,7 @@ def random_ingroup(request, pk):
     m_choice = [mineral.pk for mineral in minerals]
     prikey = random.choice(m_choice)
     return mineral_detail(request, prikey)
+
 
 def random_group(request):
     pick_group = len(Group.objects.all())
